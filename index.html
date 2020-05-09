@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>Welcome to Habitica Dashboard</h1>
+    <section>
+      <label for="">Habitica UUID</label>  <input v-model="uuid"><br>
+      <label for="">Habitica API Token</label> <input v-model="token">
+    </section>
+    <section v-if="errored">
+      <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+    </section>
+    <section v-else>
+      <p>Your current health is: <strong>20</strong></p>
+      <div id="app">
+        {{ info.status }}
+      </div>
+    </section>
+  </body>
+  <script src="javascripts/index.js"></script>
+</html>
