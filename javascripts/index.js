@@ -11,6 +11,7 @@ new Vue({
   },
   mounted () {
     this.uuid = localStorage.uuid;
+    this.token = localStorage.uuid;
     axios
       .get('https://habitica.com/api/v3/status')
       .then(response => (this.info = response.data.data))
