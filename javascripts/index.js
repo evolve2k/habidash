@@ -2,7 +2,10 @@ new Vue({
   el: '#app',
   data () {
     return {
-      info: '',
+      user: '',
+      group: '',
+      party: '',
+      members: '',
       loading: true,
       errored: false,
       uuid: '',
@@ -11,7 +14,7 @@ new Vue({
   },
   
   mounted () {
-    this.author_uuid_project = '1eb4b652-00a0-467a-b70b-adba9bdb7edf-habidash'
+    this.author_uuid_project = '1eb4b652-00a0-467a-b70b-adba9bdb7edf-habidash';
     this.uuid = localStorage.uuid;
     this.token = localStorage.token;
     const instance = axios.create({
@@ -24,17 +27,23 @@ new Vue({
         'x-client': this.author_uuid_project,
       }
     });
-    
-
     instance
-      .get('/groups?type=party,guilds')
-      .then(response => (this.info = response))
+      .get('/groups?type=party')
+      .then(response => (this.group = response.data.data[0]))
       .catch(error => {
         console.log(error)
         this.errored = true
       })
-      .finally(() => this.loading = false)
-    },
+      .finally(() => this.loading = false);
+    instance
+      .get('/groups/' + '2cf94783-4a9d-41ef-9102-40ba4bbba34d')
+      .then(response => (this.party = response))
+      .catch(error => {
+        console.log(error)
+        this.errored = true
+      })
+      .finally(() => this.loading = false);
+    },    
     watch: {
       uuid(newUuid) {
         localStorage.uuid = newUuid;
