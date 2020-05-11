@@ -37,7 +37,7 @@ new Vue({
       .finally(() => this.loading = false);
     instance
       .get('/groups/' + '2cf94783-4a9d-41ef-9102-40ba4bbba34d')
-      .then(response => (this.party = response))
+      .then(response => (this.party = response.data.data.chat[0].text))
       .catch(error => {
         console.log(error)
         this.errored = true
